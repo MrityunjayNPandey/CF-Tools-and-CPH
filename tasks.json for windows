@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "CF-Submit",
+      "command": "for /f \"usebackq tokens=*\" %a in (`egrep -o \"(http|https)?://[a-zA-Z0-9./?=_%:-]*\" .cph/.${fileBasename}*.prob`) do cf submit -f ${fileBasename} %a",
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "label": "CF-LastSubmission",
+      "command": "cf sid",
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

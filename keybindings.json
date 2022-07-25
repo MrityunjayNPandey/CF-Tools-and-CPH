@@ -1,0 +1,13 @@
+[
+  {
+    "key": "ctrl+alt+j",
+    "command": "workbench.action.tasks.runTask",
+    "args": "CF-LastSubmission"
+  },
+  {
+    "key": "ctrl+alt+f",
+    "command": "workbench.action.tasks.runTask",
+    "args": "CF-Submit",
+    "when": "editorTextFocus"
+  }
+]
