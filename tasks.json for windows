@@ -4,9 +4,15 @@
     {
       "type": "shell",
       "label": "CF-Submit",
-      "command": "for /f \"usebackq tokens=*\" %a in (`egrep -o \"(http|https)?://[a-zA-Z0-9./?=_%:-]*\" .cph/.${fileBasename}*.prob`) do cf submit -f ${fileBasename} %a",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "$urls = Select-String -Path .cph\\.${env:fileBasename}*.prob -Pattern '(http|https)?://[a-zA-Z0-9./?=_%:-]*' -AllMatches | ForEach-Object { $_.Matches.Value };",
+        "foreach ($url in $urls) { cf submit -f ${env:fileBasename} $url }"
+      ],
       "options": {
-        "cwd": "${fileDirname}"
+        "cwd": "${workspaceFolder}"
       },
       "problemMatcher": []
     },
@@ -15,7 +21,7 @@
       "label": "CF-LastSubmission",
       "command": "cf sid",
       "options": {
-        "cwd": "${fileDirname}"
+        "cwd": "${workspaceFolder}"
       },
       "problemMatcher": []
     }
